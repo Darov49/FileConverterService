@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<laptops>
+    <laptop id="0">
+        <brand>Asus</brand>
+        <model>TUF Dash F15</model>
+        <cpu>
+            <model>Intel Core i7</model>
+            <numCores>10</numCores>
+            <frequency>2.4</frequency>
+        </cpu>
+        <ram>16</ram>
+        <storage>1024</storage>
+        <gpu>
+            <model>NVIDIA RTX 3060</model>
+            <volume>6</volume>
+        </gpu>
+    </laptop>
+    <laptop id="1">
+        <brand>Asus</brand>
+        <model>VivoBook Pro 15</model>
+        <cpu>
+            <model>Intel Core i5</model>
+            <numCores>4</numCores>
+            <frequency>2.3</frequency>
+        </cpu>
+        <ram>8</ram>
+        <storage>512</storage>
+        <gpu>
+            <model>NVIDIA RTX 3050</model>
+            <volume>4</volume>
+        </gpu>
+    </laptop>
+    <laptop id="2">
+        <brand>Asus</brand>
+        <model>ZenBook 14</model>
+        <cpu>
+            <model>Intel Core i7</model>
+            <numCores>4</numCores>
+            <frequency>2.8</frequency>
+        </cpu>
+        <ram>16</ram>
+        <storage>1024</storage>
+        <gpu>
+            <model>NVIDIA GTX 1650</model>
+            <volume>4</volume>
+        </gpu>
+    </laptop>
+    <laptop id="3">
+        <brand>Lenovo</brand>
+        <model>IdeaPad Flex 5</model>
+        <cpu>
+            <model>AMD Ryzen 7</model>
+            <numCores>8</numCores>
+            <frequency>2.9</frequency>
+        </cpu>
+        <ram>16</ram>
+        <storage>1024</storage>
+        <gpu>
+            <model>AMD Radeon RX Vega 10</model>
+            <volume>2</volume>
+        </gpu>
+    </laptop>
+    <laptop id="4">
+        <brand>Lenovo</brand>
+        <model>ThinkPad X1 Carbon</model>
+        <cpu>
+            <model>Intel Core i5</model>
+            <numCores>4</numCores>
+            <frequency>1.6</frequency>
+        </cpu>
+        <ram>8</ram>
+        <storage>256</storage>
+        <gpu>
+            <model>Intel UHD Graphics</model>
+            <volume>2</volume>
+        </gpu>
+    </laptop>
+    <laptop id="5">
+        <brand>Dell</brand>
+        <model>Inspiron 14</model>
+        <cpu>
+            <model>Intel Core i7</model>
+            <numCores>4</numCores>
+            <frequency>3.0</frequency>
+        </cpu>
+        <ram>16</ram>
+        <storage>512</storage>
+        <gpu>
+            <model>Intel Iris Xe</model>
+            <volume>4</volume>
+        </gpu>
+    </laptop>
+    <laptop id="6">
+        <brand>Acer</brand>
+        <model>Swift 3</model>
+        <cpu>
+            <model>AMD Ryzen 5</model>
+            <numCores>6</numCores>
+            <frequency>2.4</frequency>
+        </cpu>
+        <ram>8</ram>
+        <storage>256</storage>
+        <gpu>
+            <model>AMD Radeon RX 5400</model>
+            <volume>4</volume>
+        </gpu>
+    </laptop>
+    <laptop id="7">
+        <brand>Apple</brand>
+        <model>MacBook Air</model>
+        <cpu>
+            <model>Apple M1</model>
+            <numCores>8</numCores>
+            <frequency>3.2</frequency>
+        </cpu>
+        <ram>16</ram>
+        <storage>256</storage>
+        <gpu>
+            <model>Apple M1 GPU</model>
+            <volume>8</volume>
+        </gpu>
+    </laptop>
+</laptops>

@@ -1,0 +1,143 @@
+{
+  "brands" : [{
+    "brand" : {
+      "name" : "Asus",
+      "laptops" : [{
+        "id" : 0,
+        "model" : "TUF Dash F15",
+        "cpu" : {
+          "model" : "Intel Core i7",
+          "numCores" : 10,
+          "frequency" : 2.4
+        },
+        "ram" : 16,
+        "storage" : 1024,
+        "gpu" : {
+          "model" : "NVIDIA RTX 3060",
+          "volume" : 6
+        }
+      }, {
+        "id" : 1,
+        "model" : "VivoBook Pro 15",
+        "cpu" : {
+          "model" : "Intel Core i5",
+          "numCores" : 4,
+          "frequency" : 2.3
+        },
+        "ram" : 8,
+        "storage" : 512,
+        "gpu" : {
+          "model" : "NVIDIA RTX 3050",
+          "volume" : 4
+        }
+      } , {
+        "id" : 2,
+        "model" : "ZenBook 14",
+        "cpu" : {
+          "model" : "Intel Core i7",
+          "numCores" : 4,
+          "frequency" : 2.8
+        },
+        "ram" : 16,
+        "storage" : 1024,
+        "gpu" : {
+          "model" : "NVIDIA GTX 1650",
+          "volume" : 4
+        }
+      }]
+    }
+  }, {
+    "brand" : {
+      "name" : "Lenovo",
+      "laptops" : [{
+        "id" : 3,
+        "model" : "IdeaPad Flex 5",
+        "cpu" : {
+          "model" : "AMD Ryzen 7",
+          "numCores" : 8,
+          "frequency" : 2.9
+        },
+        "ram" : 16,
+        "storage" : 1024,
+        "gpu" : {
+          "model" : "AMD Radeon RX Vega 10",
+          "volume" : 2
+        }
+      }, {
+        "id" : 4,
+        "model" : "ThinkPad X1 Carbon",
+        "cpu" : {
+          "model" : "Intel Core i5",
+          "numCores" : 4,
+          "frequency" : 1.6
+        },
+        "ram" : 8,
+        "storage" : 256,
+        "gpu" : {
+          "model" : "Intel UHD Graphics",
+          "volume" : 2
+        }
+      }]
+    }
+  }, {
+      "brand": {
+        "name": "Dell",
+        "laptops": [
+          {
+            "id": 5,
+            "model": "Inspiron 14",
+            "cpu": {
+              "model": "Intel Core i7",
+              "numCores": 4,
+              "frequency": 3.0
+            },
+            "ram": 16,
+            "storage": 512,
+            "gpu": {
+              "model": "Intel Iris Xe",
+              "volume": 4
+            }
+          }]
+      }
+    }, {
+    "brand": {
+      "name": "Acer",
+      "laptops": [
+        {
+          "id": 6,
+          "model": "Swift 3",
+          "cpu": {
+            "model": "AMD Ryzen 5",
+            "numCores": 6,
+            "frequency": 2.4
+          },
+          "ram": 8,
+          "storage": 256,
+          "gpu": {
+            "model": "MD Radeon RX 5400",
+            "volume": 4
+          }
+        }]
+    }
+  }, {
+    "brand": {
+      "name": "Apple",
+      "laptops": [
+        {
+          "id": 7,
+          "model": "MacBook Air",
+          "cpu": {
+            "model": "Apple M1",
+            "numCores": 8,
+            "frequency": 3.2
+          },
+          "ram": 16,
+          "storage": 256,
+          "gpu": {
+            "model": "Apple M1 GPU",
+            "volume": 8
+          }
+        }]
+    }
+  } ]
+}
