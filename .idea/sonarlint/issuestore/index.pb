@@ -23,3 +23,5 @@ S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 t
 Dsrc/main/java/org/example/service/converters/XMLtoJSONConverter.java,6\f\6fe80597f51ecd3cd75d275fd887308630a99228
+t
+Dsrc/main/java/org/example/service/converters/JSONtoXMLConverter.java,2\1\21684ca6b8d6ea8b8ab301b5088e3c9f1743b83f
