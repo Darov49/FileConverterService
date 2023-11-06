@@ -1,8 +1,8 @@
 {
-  "brands" : [{
+  "brands" : [ {
     "brand" : {
       "name" : "Asus",
-      "laptops" : [{
+      "laptops" : [ {
         "id" : 0,
         "model" : "TUF Dash F15",
         "cpu" : {
@@ -44,7 +44,7 @@
           "model" : "NVIDIA GTX 1650",
           "volume" : 4
         }
-      }]
+      } ]
     }
   }, {
     "brand" : {
@@ -77,13 +77,12 @@
           "model" : "Intel UHD Graphics",
           "volume" : 2
         }
-      }]
+      } ]
     }
   }, {
       "brand": {
         "name": "Dell",
-        "laptops": [
-          {
+        "laptops": [ {
             "id": 5,
             "model": "Inspiron 14",
             "cpu": {
@@ -97,13 +96,12 @@
               "model": "Intel Iris Xe",
               "volume": 4
             }
-          }]
+          } ]
       }
     }, {
     "brand": {
       "name": "Acer",
-      "laptops": [
-        {
+      "laptops": [ {
           "id": 6,
           "model": "Swift 3",
           "cpu": {
@@ -117,13 +115,12 @@
             "model": "MD Radeon RX 5400",
             "volume": 4
           }
-        }]
+        } ]
     }
   }, {
     "brand": {
       "name": "Apple",
-      "laptops": [
-        {
+      "laptops": [ {
           "id": 7,
           "model": "MacBook Air",
           "cpu": {
@@ -137,7 +134,7 @@
             "model": "Apple M1 GPU",
             "volume": 8
           }
-        }]
+        } ]
     }
   } ]
 }

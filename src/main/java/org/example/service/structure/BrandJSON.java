@@ -1,11 +1,15 @@
 package org.example.service.structure;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import java.util.List;
 
 /**
  * Класс для хранения информации о бренде в JSON
  */
+@JsonTypeName("brand")
 public class BrandJSON {
+
     private String name;
     private List<LaptopJSON> laptops;
 
