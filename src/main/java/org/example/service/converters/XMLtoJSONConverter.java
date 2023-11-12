@@ -17,13 +17,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * Класс для конвертации файла из XML в JSON
  */
 public class XMLtoJSONConverter {
-    public static List<LaptopXML> readXML(String pathName) throws Exception {
+
+    public static void convert(String inputFilePath, String outputFilePath) throws Exception {
+        List<LaptopXML> laptops = readXML(inputFilePath);
+        BrandsJSON brands = transform((laptops));
+        write(brands, outputFilePath);
+    }
+
+    private static List<LaptopXML> readXML(String pathName) throws Exception {
         XmlMapper xmlMapper = new XmlMapper();
         File file = new File(pathName);
         return xmlMapper.readValue(file, new TypeReference<List<LaptopXML>>() {});
     }
 
-    public static BrandsJSON convert(List<LaptopXML> laptops) {
+    private static BrandsJSON transform(List<LaptopXML> laptops) {
         List<BrandJSON> brands = new ArrayList<>();
         for (LaptopXML laptop : laptops) {
             LaptopJSON laptopJSON = new LaptopJSON();
@@ -57,13 +64,13 @@ public class XMLtoJSONConverter {
         return brandsJSON;
     }
 
-    public static void write(BrandsJSON brandsJSON, String path) {
+    private static void write(BrandsJSON brandsJSON, String outputFile) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
-            objectMapper.writeValue(new File(path + "brands.json"), brandsJSON);
+            objectMapper.writeValue(new File(outputFile), brandsJSON);
         }
-        catch (Exception e) { }
+        catch (Exception e){}
     }
 
 }

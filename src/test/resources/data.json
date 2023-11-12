@@ -30,7 +30,7 @@
           "model" : "NVIDIA RTX 3050",
           "volume" : 4
         }
-      } , {
+      }, {
         "id" : 2,
         "model" : "ZenBook 14",
         "cpu" : {
@@ -49,7 +49,7 @@
   }, {
     "brand" : {
       "name" : "Lenovo",
-      "laptops" : [{
+      "laptops" : [ {
         "id" : 3,
         "model" : "IdeaPad Flex 5",
         "cpu" : {
@@ -80,61 +80,61 @@
       } ]
     }
   }, {
-      "brand": {
-        "name": "Dell",
-        "laptops": [ {
-            "id": 5,
-            "model": "Inspiron 14",
-            "cpu": {
-              "model": "Intel Core i7",
-              "numCores": 4,
-              "frequency": 3.0
-            },
-            "ram": 16,
-            "storage": 512,
-            "gpu": {
-              "model": "Intel Iris Xe",
-              "volume": 4
-            }
-          } ]
-      }
-    }, {
-    "brand": {
-      "name": "Acer",
-      "laptops": [ {
-          "id": 6,
-          "model": "Swift 3",
-          "cpu": {
-            "model": "AMD Ryzen 5",
-            "numCores": 6,
-            "frequency": 2.4
-          },
-          "ram": 8,
-          "storage": 256,
-          "gpu": {
-            "model": "AMD Radeon RX 5400",
-            "volume": 4
-          }
-        } ]
+    "brand" : {
+      "name" : "Dell",
+      "laptops" : [ {
+        "id" : 5,
+        "model" : "Inspiron 14",
+        "cpu" : {
+          "model" : "Intel Core i7",
+          "numCores" : 4,
+          "frequency" : 3.0
+        },
+        "ram" : 16,
+        "storage" : 512,
+        "gpu" : {
+          "model" : "Intel Iris Xe",
+          "volume" : 4
+        }
+      } ]
     }
   }, {
-    "brand": {
-      "name": "Apple",
-      "laptops": [ {
-          "id": 7,
-          "model": "MacBook Air",
-          "cpu": {
-            "model": "Apple M1",
-            "numCores": 8,
-            "frequency": 3.2
-          },
-          "ram": 16,
-          "storage": 256,
-          "gpu": {
-            "model": "Apple M1 GPU",
-            "volume": 8
-          }
-        } ]
+    "brand" : {
+      "name" : "Acer",
+      "laptops" : [ {
+        "id" : 6,
+        "model" : "Swift 3",
+        "cpu" : {
+          "model" : "AMD Ryzen 5",
+          "numCores" : 6,
+          "frequency" : 2.4
+        },
+        "ram" : 8,
+        "storage" : 256,
+        "gpu" : {
+          "model" : "AMD Radeon RX 5400",
+          "volume" : 4
+        }
+      } ]
+    }
+  }, {
+    "brand" : {
+      "name" : "Apple",
+      "laptops" : [ {
+        "id" : 7,
+        "model" : "MacBook Air",
+        "cpu" : {
+          "model" : "Apple M1",
+          "numCores" : 8,
+          "frequency" : 3.2
+        },
+        "ram" : 16,
+        "storage" : 256,
+        "gpu" : {
+          "model" : "Apple M1 GPU",
+          "volume" : 8
+        }
+      } ]
     }
   } ]
 }

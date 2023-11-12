@@ -25,3 +25,5 @@ t
 Dsrc/main/java/org/example/service/converters/XMLtoJSONConverter.java,6\f\6fe80597f51ecd3cd75d275fd887308630a99228
 t
 Dsrc/main/java/org/example/service/converters/JSONtoXMLConverter.java,2\1\21684ca6b8d6ea8b8ab301b5088e3c9f1743b83f
+p
+@src/test/java/org/example/service/converters/ConvertersTest.java,1\b\1b4dbcd8ff9830e06965b57b98a966e62917d7d7
