@@ -12,11 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ConvertersTest {
     @Test
-    void testXMLtoJSONConvert () throws Exception {
-        XMLtoJSONConverter.convert("src/test/resources/data.xml", "src/test/resources/result.json");
+    void testXMLtoJSONConvert() throws Exception {
+        String outputPath = "src/test/resources/result.json";
+        XMLtoJSONConverter.convert("src/test/resources/data.xml", outputPath);
 
         Path expectedFile = Paths.get("src/test/resources/data.json");
-        Path actualFile = Paths.get("src/test/resources/result.json");
+        Path actualFile = Paths.get(outputPath);
 
         String inputFileContent = Files.readString(expectedFile).replaceAll("\\s", "");
         String outputFileContent = Files.readString(actualFile).replaceAll("\\s", "");
@@ -24,12 +25,13 @@ class ConvertersTest {
         assertEquals(inputFileContent, outputFileContent);
     }
 
-@Test
-    void testJSONtoXMLConvert () throws Exception {
-        JSONtoXMLConverter.convert("src/test/resources/data.json", "src/test/resources/result.xml");
+    @Test
+    void testJSONtoXMLConvert() throws Exception {
+        String outputPath = "src/test/resources/result.xml";
+        JSONtoXMLConverter.convert("src/test/resources/data.json", outputPath);
 
         Path expectedFile = Paths.get("src/test/resources/data.xml");
-        Path actualFile = Paths.get("src/test/resources/result.xml");
+        Path actualFile = Paths.get(outputPath);
 
         String inputFileContent = Files.readString(expectedFile).trim().replaceAll("\\s", "");
         String outputFileContent = Files.readString(actualFile).trim().replaceAll("\\s", "");

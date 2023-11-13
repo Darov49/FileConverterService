@@ -1,19 +1,24 @@
 package org.example;
 
+import org.example.service.ConverterException;
 import org.example.service.converters.XMLtoJSONConverter;
 import org.example.service.converters.JSONtoXMLConverter;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws ConverterException {
+
         if (!checkArgs(args)) {
             System.err.println("Некорректный ввод!");
             return;
         }
-        if (args[0].endsWith(".xml")) {
-            XMLtoJSONConverter.convert(args[0], args[1]);
-        }
-        else {
-            JSONtoXMLConverter.convert(args[0], args[1]);
+        try {
+            if (args[0].endsWith(".xml")) {
+                XMLtoJSONConverter.convert(args[0], args[1]);
+            } else {
+                JSONtoXMLConverter.convert(args[0], args[1]);
+            }
+        } catch (ConverterException e) {
+            throw new ConverterException("Завершение программы");
         }
     }
 
@@ -27,9 +32,6 @@ public class Main {
         }
         String inputFileExtension = args[0].substring(args[0].lastIndexOf('.'), args[0].length() - 1);
         String outputFileExtension = args[1].substring(args[1].lastIndexOf('.'), args[1].length() - 1);
-        if (inputFileExtension.equals(outputFileExtension)) {
-            return false;
-        }
-        return true;
+        return !inputFileExtension.equals(outputFileExtension);
     }
 }
