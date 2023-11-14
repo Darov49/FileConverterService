@@ -15,6 +15,17 @@ public class LaptopXML {
     private int storage;
     private GPU gpu;
 
+    public LaptopXML(int id, String brand, String model, CPU cpu, int ram, int storage, GPU gpu) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.cpu = cpu;
+        this.ram = ram;
+        this.storage = storage;
+        this.gpu = gpu;
+    }
+
+    public LaptopXML() {}
 
     public int getId() {
         return id;

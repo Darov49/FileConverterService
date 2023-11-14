@@ -16,6 +16,12 @@ public class LaptopsXML {
     @JacksonXmlElementWrapper(useWrapping = false)
     private List<LaptopXML> laptops;
 
+    public LaptopsXML (List<LaptopXML> laptops) {
+        this.laptops = laptops;
+    }
+
+    public LaptopsXML() {}
+
     public List<LaptopXML> getLaptops() {
         return laptops;
     }

@@ -43,15 +43,8 @@ public class JSONtoXMLConverter {
             List<LaptopXML> laptops = new ArrayList<>();
             for (BrandJSON brand : brands) {
                 for (LaptopJSON laptopJSON : brand.getLaptops()) {
-                    LaptopXML laptopXML = new LaptopXML();
-                    laptopXML.setId(laptopJSON.getId());
-                    laptopXML.setBrand(brand.getName());
-                    laptopXML.setModel(laptopJSON.getModel());
-                    laptopXML.setCpu(laptopJSON.getCpu());
-                    laptopXML.setRam(laptopJSON.getRam());
-                    laptopXML.setStorage(laptopJSON.getStorage());
-                    laptopXML.setGpu(laptopJSON.getGpu());
-
+                    LaptopXML laptopXML = new LaptopXML(laptopJSON.getId(), brand.getName(), laptopJSON.getModel(),
+                            laptopJSON.getCpu(), laptopJSON.getRam(), laptopJSON.getStorage(), laptopJSON.getGpu());
                     laptops.add(laptopXML);
                 }
             }

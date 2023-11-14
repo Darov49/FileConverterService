@@ -8,6 +8,14 @@ public class CPU {
     private int numCores;
     private double frequency;
 
+    public CPU(String model, int numCores, double frequency) {
+        this.model = model;
+        this.numCores = numCores;
+        this.frequency = frequency;
+    }
+
+    public CPU() {}
+
     public String getModel() {
         return model;
     }

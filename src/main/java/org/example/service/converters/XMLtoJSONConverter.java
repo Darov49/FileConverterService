@@ -43,16 +43,10 @@ public class XMLtoJSONConverter {
     private static BrandsJSON transform(List<LaptopXML> laptops) throws ConverterException {
         try {
             List<BrandJSON> brands = new ArrayList<>();
-            for (LaptopXML laptop : laptops) {
-                LaptopJSON laptopJSON = new LaptopJSON();
-                laptopJSON.setId(laptop.getId());
-                laptopJSON.setModel(laptop.getModel());
-                laptopJSON.setCpu(laptop.getCpu());
-                laptopJSON.setRam(laptop.getRam());
-                laptopJSON.setStorage(laptop.getStorage());
-                laptopJSON.setGpu(laptop.getGpu());
-
-                String brandName = laptop.getBrand();
+            for (LaptopXML laptopXML : laptops) {
+                LaptopJSON laptopJSON = new LaptopJSON(laptopXML.getId(), laptopXML.getModel(), laptopXML.getCpu(),
+                        laptopXML.getRam(),laptopXML.getStorage(), laptopXML.getGpu());
+                String brandName = laptopXML.getBrand();
                 int i;
                 for (i = 0; i < brands.size(); i++) {
                     if (brands.get(i).getName().equals(brandName)) {
@@ -61,9 +55,7 @@ public class XMLtoJSONConverter {
                     }
                 }
                 if (i == brands.size()) {
-                    BrandJSON newBrand = new BrandJSON();
-                    newBrand.setName(brandName);
-                    newBrand.setLaptops(new ArrayList<>());
+                    BrandJSON newBrand = new BrandJSON(brandName, new ArrayList<>());
                     newBrand.getLaptops().addLast(laptopJSON);
                     brands.addLast(newBrand);
                 }

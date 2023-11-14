@@ -11,6 +11,17 @@ public class LaptopJSON {
     private int storage;
     private GPU gpu;
 
+    public LaptopJSON(int id, String model, CPU cpu, int ram, int storage, GPU gpu) {
+        this.id = id;
+        this.model = model;
+        this.cpu = cpu;
+        this.ram = ram;
+        this.storage = storage;
+        this.gpu = gpu;
+    }
+
+    public LaptopJSON() {}
+
     public int getId() {
         return id;
     }

@@ -7,6 +7,13 @@ public class GPU {
     private String model;
     private int volume;
 
+    public GPU(String model, int volume) {
+        this.model = model;
+        this.volume = volume;
+    }
+
+    public GPU() {}
+
     public String getModel() {
         return model;
     }

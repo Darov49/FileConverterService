@@ -12,6 +12,12 @@ public class BrandsJSON {
     @JsonProperty("brands")
     private List<BrandJSON> brands;
 
+    public BrandsJSON(List<BrandJSON> brands) {
+        this.brands = brands;
+    }
+
+    public BrandsJSON() {}
+
     public List<BrandJSON> getBrands() {
         return brands;
     }
