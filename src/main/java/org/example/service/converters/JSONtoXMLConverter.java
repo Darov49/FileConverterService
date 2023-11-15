@@ -49,8 +49,6 @@ public class JSONtoXMLConverter {
                 }
             }
 
-            laptops.sort(Comparator.comparingInt(LaptopXML::getId)); // ноутбуки в списке упорядочены по их id
-
             LaptopsXML laptopsXML = new LaptopsXML();
             laptopsXML.setLaptops(laptops);
             return laptopsXML;
