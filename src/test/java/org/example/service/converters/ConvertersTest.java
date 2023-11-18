@@ -12,7 +12,7 @@ class ConvertersTest {
     @Test
     void testXMLtoJSONConvert() throws Exception {
         String outputPath = "src/test/resources/result.json";
-        XMLtoJSONConverter.convert("src/test/resources/data.xml", outputPath);
+        Conversion.convert("src/test/resources/data.xml", outputPath);
 
         Path expectedFile = Paths.get("src/test/resources/data.json");
         Path actualFile = Paths.get(outputPath);
@@ -26,7 +26,7 @@ class ConvertersTest {
     @Test
     void testJSONtoXMLConvert() throws Exception {
         String outputPath = "src/test/resources/result.xml";
-        JSONtoXMLConverter.convert("src/test/resources/data.json", outputPath);
+        Conversion.convert("src/test/resources/data.json", outputPath);
 
         Path expectedFile = Paths.get("src/test/resources/data.xml");
         Path actualFile = Paths.get(outputPath);

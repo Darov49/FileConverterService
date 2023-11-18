@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import lombok.experimental.UtilityClass;
 import org.example.service.ConverterException;
 import org.example.service.structure.*;
 
@@ -14,29 +15,25 @@ import java.util.List;
 /***
  * Класс для конвертации файла из JSON в XML
  */
+@UtilityClass
 public class JSONtoXMLConverter {
-    private JSONtoXMLConverter() throws ConverterException {
-        throw new ConverterException("Нельзя использовать конструктор для статического класса");
-    }
-
-    public static void convert(String inputFilePath, String outputFilePath) throws ConverterException {
-        List<BrandJSON> brands = readJSON(inputFilePath);
+    public void convert(String inputFilePath, String outputFilePath, XmlMapper xmlMapper, ObjectMapper objectMapper)
+            throws ConverterException {
+        List<BrandJSON> brands = readJSON(inputFilePath, objectMapper);
         LaptopsXML laptops = transform((brands));
-        write(laptops, outputFilePath);
+        write(laptops, outputFilePath, xmlMapper);
     }
 
-    public static List<BrandJSON> readJSON(String pathName) throws ConverterException {
+    public List<BrandJSON> readJSON(String inputFile, ObjectMapper objectMapper) throws ConverterException {
        try {
-           ObjectMapper objectMapper = new ObjectMapper();
-           File file = new File(pathName);
-           BrandsJSON brands = objectMapper.readValue(file, new TypeReference<>() {});
+           BrandsJSON brands = objectMapper.readValue(new File(inputFile), new TypeReference<>() {});
            return brands.getBrands();
        } catch (Exception e) {
            throw new ConverterException("Не удалось считать файл json");
        }
     }
 
-    public static LaptopsXML transform(List<BrandJSON> brands) throws ConverterException {
+    public LaptopsXML transform(List<BrandJSON> brands) throws ConverterException {
         try {
             List<LaptopXML> laptops = new ArrayList<>();
 
@@ -60,11 +57,9 @@ public class JSONtoXMLConverter {
         }
     }
 
-    public static void write(LaptopsXML laptopsXML, String outputFile) throws ConverterException {
+    public void write(LaptopsXML laptopsXML, String outputFile, XmlMapper xmlMapper) throws ConverterException {
         try {
-            XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            xmlMapper.writeValue(new File(outputFile), laptopsXML);
+            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT).writeValue(new File(outputFile), laptopsXML);
         } catch (Exception e) {
             throw new ConverterException("Не удалось записать данные в файл xml");
         }
