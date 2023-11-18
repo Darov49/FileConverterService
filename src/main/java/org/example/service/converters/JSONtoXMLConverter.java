@@ -29,8 +29,7 @@ public class JSONtoXMLConverter {
        try {
            ObjectMapper objectMapper = new ObjectMapper();
            File file = new File(pathName);
-           BrandsJSON brands = objectMapper.readValue(file, new TypeReference<>() {
-           });
+           BrandsJSON brands = objectMapper.readValue(file, new TypeReference<>() {});
            return brands.getBrands();
        } catch (Exception e) {
            throw new ConverterException("Не удалось считать файл json");
@@ -40,26 +39,31 @@ public class JSONtoXMLConverter {
     public static LaptopsXML transform(List<BrandJSON> brands) throws ConverterException {
         try {
             List<LaptopXML> laptops = new ArrayList<>();
+
             for (BrandJSON brand : brands) {
                 for (LaptopJSON laptopJSON : brand.getLaptops()) {
-                    LaptopXML laptopXML = new LaptopXML(laptopJSON.getId(), brand.getName(), laptopJSON.getModel(),
-                            laptopJSON.getCpu(), laptopJSON.getRam(), laptopJSON.getStorage(), laptopJSON.getGpu());
-                    laptops.add(laptopXML);
+                    laptops.add(LaptopXML.builder()
+                            .id(laptopJSON.getId())
+                            .brand(brand.getName())
+                            .model(laptopJSON.getModel())
+                            .cpu(laptopJSON.getCpu())
+                            .ram(laptopJSON.getRam())
+                            .storage(laptopJSON.getStorage())
+                            .gpu(laptopJSON.getGpu())
+                            .build());
                 }
             }
 
-            LaptopsXML laptopsXML = new LaptopsXML();
-            laptopsXML.setLaptops(laptops);
-            return laptopsXML;
+            return LaptopsXML.builder().laptops(laptops).build();
         } catch (Exception e) {
             throw new ConverterException("Не удалось сконвертировать файл. Проверьте входной файл json");
         }
     }
 
-    public static void write(LaptopsXML laptopsXML, String outputFile) throws  ConverterException{
+    public static void write(LaptopsXML laptopsXML, String outputFile) throws ConverterException {
         try {
-        XmlMapper xmlMapper = new XmlMapper();
-        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
+            XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
             xmlMapper.writeValue(new File(outputFile), laptopsXML);
         } catch (Exception e) {
             throw new ConverterException("Не удалось записать данные в файл xml");
