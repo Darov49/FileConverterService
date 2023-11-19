@@ -31,8 +31,8 @@ public class MenuService {
 
     public boolean isCorrectOutputFile(String inputFile, String outputFile) {
         f = new File(outputFile);
-        final boolean isCorrectExtension = (inputFile.endsWith(xmlExtension) && inputFile.endsWith(jsonExtension) ||
-                outputFile.endsWith(jsonExtension) && inputFile.endsWith(xmlExtension));
-        return (!f.isDirectory() && isCorrectExtension);
+        final boolean isCorrectExtension = (inputFile.endsWith(xmlExtension) && outputFile.endsWith(jsonExtension) ||
+                inputFile.endsWith(jsonExtension) && outputFile.endsWith(xmlExtension));
+        return (!f.isDirectory() && f.getParentFile().exists() && isCorrectExtension);
     }
 }

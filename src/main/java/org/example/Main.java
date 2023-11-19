@@ -1,40 +1,39 @@
 package org.example;
 
+import lombok.extern.log4j.Log4j2;
 import org.example.service.ConverterException;
 import org.example.service.MenuService;
 import org.example.service.converters.Conversion;
 
+@Log4j2
 public class Main {
-    public static void main(String[] args) throws ConverterException {
+    public static void main(String[] args) {
         try {
             switch (args.length) {
                 // интерактивный выбор аргументов
                 case 0 -> {
                     final String inputFile = MenuService.getInputFile();
                     if (!MenuService.isCorrectInputFile(inputFile)) {
-                        throw new ConverterException("Некорректный входной файл");
+                        log.error("Некорректный входной файл");
+                        return;
                     }
                     final String outputFile = MenuService.getOutputFile();
                     if (!MenuService.isCorrectOutputFile(inputFile, outputFile)) {
-                        throw new ConverterException("Некорректный выходной файл");
+                        log.error("Некорректный выходной файл");
+                        return;
                     }
                     Conversion.convert(inputFile, outputFile);
                 }
                 // аргументы из консоли
-                case 2 -> {
-                    try {
-                        Conversion.convert(args[0], args[1]);
-                    } catch (ConverterException e) {
-                        throw new ConverterException("Завершение программы");
-                    }
+                case 2 -> Conversion.convert(args[0], args[1]);
+                default -> {
+                    log.error("Неверное число аргументов");
+                    return;
                 }
-                default -> System.err.println("Неверное число аргументов");
             }
-            System.out.println("Конвертация завершена");
-        } catch (ConverterException e) {
-            throw new ConverterException("Программа прервана");
+            System.out.println("Конвертация завершена успешно");
+        } catch (ConverterException exception) {
+            log.error("Завершение программы\n");
         }
-
-
     }
 }

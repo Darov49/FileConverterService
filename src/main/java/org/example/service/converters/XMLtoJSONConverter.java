@@ -3,6 +3,7 @@ package org.example.service.converters;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.experimental.UtilityClass;
+import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.example.service.ConverterException;
 import org.example.service.structure.BrandJSON;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * Класс для конвертации файла из XML в JSON
  */
 @UtilityClass
+@Log4j2
 public class XMLtoJSONConverter {
     public void convert(String inputFilePath, String outputFilePath, XmlMapper xmlMapper, ObjectMapper objectMapper)
             throws ConverterException {
@@ -33,8 +35,9 @@ public class XMLtoJSONConverter {
     private List<LaptopXML> readXML(String inputFile, XmlMapper xmlMapper) throws ConverterException {
         try {
             return xmlMapper.readValue(new File(inputFile), new TypeReference<>() {});
-        } catch (Exception e) {
-            throw new ConverterException("Не удалось считать файл xml");
+        } catch (Exception fileReadException) {
+            log.error("Не удалось считать файл xml\n");
+            throw new ConverterException(fileReadException);
         }
     }
 
@@ -70,16 +73,18 @@ public class XMLtoJSONConverter {
             }
 
             return BrandsJSON.builder().brands(brands).build();
-        } catch (Exception e) {
-            throw new ConverterException("Не удалось сконвертировать файл. Проверьте входной файл xml");
+        } catch (Exception fileConvertException) {
+            log.error("Не удалось сконвертировать файл\n");
+            throw new ConverterException(fileConvertException);
         }
     }
 
     private void write(BrandsJSON brandsJSON, String outputFile, ObjectMapper objectMapper) throws ConverterException {
         try {
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT).writeValue(new File(outputFile), brandsJSON);
-        } catch (Exception e) {
-            throw new ConverterException("Не удалось записать данные в файл json");
+        } catch (Exception fileWriteException) {
+            log.error("Не удалось записать данные в файл json\n");
+            throw new ConverterException(fileWriteException);
         }
     }
 }

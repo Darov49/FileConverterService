@@ -3,10 +3,15 @@ package org.example.service.converters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.experimental.UtilityClass;
+import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.example.service.ConverterException;
 
+/**
+ * Класс для обработки конвертации файлов
+ */
 @UtilityClass
+@Log4j2
 public class Conversion {
 
     final XmlMapper xmlMapper = new XmlMapper();
@@ -34,11 +39,11 @@ public class Conversion {
             switch (conversionType) {
                 case XML_TO_JSON -> XMLtoJSONConverter.convert(inputFile, outputFile, xmlMapper, objectMapper);
                 case JSON_TO_XML -> JSONtoXMLConverter.convert(inputFile, outputFile, xmlMapper, objectMapper);
-                default -> System.err.println("Некорректный ввод");
+                default -> log.error("Некорректный ввод");
             }
         } catch (ConverterException converterException) {
-            throw new ConverterException("Завершение программы");
+            log.error("Конвертация прервана\n");
+            throw converterException;
         }
     }
-
 }
