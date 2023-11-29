@@ -1,6 +1,7 @@
 package org.example.service.converters;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
@@ -14,19 +15,22 @@ import org.example.service.ConverterException;
 @Log4j2
 public class Conversion {
 
-    final XmlMapper xmlMapper = new XmlMapper();
-    final ObjectMapper objectMapper = new ObjectMapper();
+    private final XmlMapper xmlMapper = (XmlMapper) new XmlMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+
+    private final String xmlExtension = ".xml";
+    private final String jsonExtension = ".json";
 
     private enum conversionType {
         XML_TO_JSON, JSON_TO_XML, INVALID
     }
 
     private conversionType getConversionType(String inputFile, String outputFile) {
-        if (inputFile.endsWith(".xml") && outputFile.endsWith(".json")) {
+        if (inputFile.endsWith(xmlExtension) && outputFile.endsWith(jsonExtension)) {
             return conversionType.XML_TO_JSON;
         }
 
-        if (inputFile.endsWith(".json") && outputFile.endsWith(".xml")) {
+        if (inputFile.endsWith(jsonExtension) && outputFile.endsWith(xmlExtension)) {
             return conversionType.JSON_TO_XML;
         }
 

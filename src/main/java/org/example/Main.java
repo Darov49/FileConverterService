@@ -1,6 +1,7 @@
 package org.example;
 
 import lombok.extern.log4j.Log4j2;
+import lombok.val;
 import org.example.service.ConverterException;
 import org.example.service.MenuService;
 import org.example.service.converters.Conversion;
@@ -12,12 +13,12 @@ public class Main {
             switch (args.length) {
                 // интерактивный выбор аргументов
                 case 0 -> {
-                    final String inputFile = MenuService.getInputFile();
+                    val inputFile = MenuService.getInputFile();
                     if (!MenuService.isCorrectInputFile(inputFile)) {
                         log.error("Некорректный входной файл");
                         return;
                     }
-                    final String outputFile = MenuService.getOutputFile();
+                    val outputFile = MenuService.getOutputFile();
                     if (!MenuService.isCorrectOutputFile(inputFile, outputFile)) {
                         log.error("Некорректный выходной файл");
                         return;

@@ -10,7 +10,7 @@ public class MenuService {
     private final Scanner scanner = new Scanner(System.in);
     private final String jsonExtension = ".json";
     private final String xmlExtension = ".xml";
-    private File f;
+    private File checkingFile;
 
     public String getInputFile() {
         System.out.println("Путь к файлу для конвертации: ");
@@ -24,15 +24,15 @@ public class MenuService {
 
 
     public boolean isCorrectInputFile(String inputFile) {
-        f = new File(inputFile);
-        return (f.exists() && !f.isDirectory() &&
+        checkingFile = new File(inputFile);
+        return (checkingFile.exists() && !checkingFile.isDirectory() &&
                 (inputFile.endsWith(xmlExtension) || inputFile.endsWith(jsonExtension)));
     }
 
     public boolean isCorrectOutputFile(String inputFile, String outputFile) {
-        f = new File(outputFile);
+        checkingFile = new File(outputFile);
         final boolean isCorrectExtension = (inputFile.endsWith(xmlExtension) && outputFile.endsWith(jsonExtension) ||
                 inputFile.endsWith(jsonExtension) && outputFile.endsWith(xmlExtension));
-        return (!f.isDirectory() && f.getParentFile().exists() && isCorrectExtension);
+        return (!checkingFile.isDirectory() && checkingFile.getParentFile().exists() && isCorrectExtension);
     }
 }

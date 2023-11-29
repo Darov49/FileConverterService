@@ -6,11 +6,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
+import lombok.val;
 import org.example.service.ConverterException;
 import org.example.service.structure.*;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /***
@@ -19,51 +20,49 @@ import java.util.List;
 @UtilityClass
 @Log4j2
 public class JSONtoXMLConverter {
-    public void convert(String inputFilePath, String outputFilePath, XmlMapper xmlMapper, ObjectMapper objectMapper)
-            throws ConverterException {
-        List<BrandJSON> brands = readJSON(inputFilePath, objectMapper);
-        LaptopsXML laptops = transform((brands));
+    public void convert(final String inputFilePath, final String outputFilePath,
+                        final XmlMapper xmlMapper, final ObjectMapper objectMapper) throws ConverterException {
+        val brands = readJSON(inputFilePath, objectMapper);
+        val laptops = transform((brands));
         write(laptops, outputFilePath, xmlMapper);
     }
 
-    public List<BrandJSON> readJSON(String inputFile, ObjectMapper objectMapper) throws ConverterException {
-       try {
-           BrandsJSON brands = objectMapper.readValue(new File(inputFile), new TypeReference<>() {});
-           return brands.getBrands();
-       } catch (Exception fileReadException) {
-           log.error("Не удалось считать файл json\n");
-           throw new ConverterException(fileReadException);
-       }
+    private List<BrandJSON> readJSON(final String inputFile, final ObjectMapper objectMapper) throws ConverterException {
+        try {
+            final BrandsJSON brands = objectMapper.readValue(new File(inputFile), new TypeReference<>() {
+            });
+            return brands.getBrands();
+        } catch (Exception fileReadException) {
+            log.error("Не удалось считать файл json\n");
+            throw new ConverterException(fileReadException);
+        }
     }
 
-    public LaptopsXML transform(List<BrandJSON> brands) throws ConverterException {
+    private LaptopsXML transform(final List<BrandJSON> brands) throws ConverterException {
         try {
-            List<LaptopXML> laptops = new ArrayList<>();
-
-            for (BrandJSON brand : brands) {
-                for (LaptopJSON laptopJSON : brand.getLaptops()) {
-                    laptops.add(LaptopXML.builder()
-                            .id(laptopJSON.getId())
-                            .brand(brand.getName())
-                            .model(laptopJSON.getModel())
-                            .cpu(laptopJSON.getCpu())
-                            .ram(laptopJSON.getRam())
-                            .storage(laptopJSON.getStorage())
-                            .gpu(laptopJSON.getGpu())
-                            .build());
-                }
-            }
-
-            return LaptopsXML.builder().laptops(laptops).build();
+            return LaptopsXML.builder().laptops(brands.stream()
+                    .flatMap(brand -> brand.getLaptops().stream()
+                            .map(laptopJSON -> LaptopXML.builder()
+                                    .id(laptopJSON.getId())
+                                    .brand(brand.getName())
+                                    .model(laptopJSON.getModel())
+                                    .cpu(laptopJSON.getCpu())
+                                    .ram(laptopJSON.getRam())
+                                    .storage(laptopJSON.getStorage())
+                                    .gpu(laptopJSON.getGpu())
+                                    .build()))
+                    .sorted(Comparator.comparingInt(LaptopXML::getId))
+                    .toList()).build();
         } catch (Exception fileConvertException) {
             log.error("Не удалось сконвертировать файл\n");
             throw new ConverterException(fileConvertException);
         }
     }
 
-    public void write(LaptopsXML laptopsXML, String outputFile, XmlMapper xmlMapper) throws ConverterException {
+    private void write(final LaptopsXML laptopsXML, final String outputFile, final XmlMapper xmlMapper)
+            throws ConverterException {
         try {
-            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT).writeValue(new File(outputFile), laptopsXML);
+            xmlMapper.writeValue(new File(outputFile), laptopsXML);
         } catch (Exception fileWriteException) {
             log.error("Не удалось записать данные в файл xml\n");
             throw new ConverterException(fileWriteException);
