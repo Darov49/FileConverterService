@@ -2,13 +2,15 @@ package org.example.service.converters;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
-import org.example.service.ConverterException;
-import org.example.service.structure.*;
+import org.example.exceptions.ConverterException;
+import org.example.bean.dto.BrandJSON;
+import org.example.bean.dto.BrandsJSON;
+import org.example.bean.dto.LaptopXML;
+import org.example.bean.dto.LaptopsXML;
 
 import java.io.File;
 import java.util.Comparator;

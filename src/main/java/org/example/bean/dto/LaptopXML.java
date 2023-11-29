@@ -1,4 +1,4 @@
-package org.example.service.structure;
+package org.example.bean.dto;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.*;

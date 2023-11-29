@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.exceptions;
 
 import lombok.experimental.StandardException;
 

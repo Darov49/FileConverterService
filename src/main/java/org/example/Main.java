@@ -2,9 +2,9 @@ package org.example;
 
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
-import org.example.service.ConverterException;
+import org.example.exceptions.ConverterException;
 import org.example.service.MenuService;
-import org.example.service.converters.Conversion;
+import org.example.service.ConversionService;
 
 @Log4j2
 public class Main {
@@ -23,10 +23,10 @@ public class Main {
                         log.error("Некорректный выходной файл");
                         return;
                     }
-                    Conversion.convert(inputFile, outputFile);
+                    ConversionService.convert(inputFile, outputFile);
                 }
                 // аргументы из консоли
-                case 2 -> Conversion.convert(args[0], args[1]);
+                case 2 -> ConversionService.convert(args[0], args[1]);
                 default -> {
                     log.error("Неверное число аргументов");
                     return;

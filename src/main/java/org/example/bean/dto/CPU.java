@@ -1,4 +1,4 @@
-package org.example.service.structure;
+package org.example.bean.dto;
 
 import lombok.*;
 

@@ -1,5 +1,6 @@
 package org.example.service.converters;
 
+import org.example.service.ConversionService;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
@@ -12,7 +13,7 @@ class ConvertersTest {
     @Test
     void testXMLtoJSONConvert() throws Exception {
         String outputPath = "src/test/resources/result.json";
-        Conversion.convert("src/test/resources/data.xml", outputPath);
+        ConversionService.convert("src/test/resources/data.xml", outputPath);
 
         Path expectedFile = Paths.get("src/test/resources/data.json");
         Path actualFile = Paths.get(outputPath);
@@ -26,7 +27,7 @@ class ConvertersTest {
     @Test
     void testJSONtoXMLConvert() throws Exception {
         String outputPath = "src/test/resources/result.xml";
-        Conversion.convert("src/test/resources/data.json", outputPath);
+        ConversionService.convert("src/test/resources/data.json", outputPath);
 
         Path expectedFile = Paths.get("src/test/resources/data.xml");
         Path actualFile = Paths.get(outputPath);

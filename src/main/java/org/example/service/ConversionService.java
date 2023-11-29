@@ -1,4 +1,4 @@
-package org.example.service.converters;
+package org.example.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -6,14 +6,16 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
-import org.example.service.ConverterException;
+import org.example.exceptions.ConverterException;
+import org.example.service.converters.JSONtoXMLConverter;
+import org.example.service.converters.XMLtoJSONConverter;
 
 /**
  * Класс для обработки конвертации файлов
  */
 @UtilityClass
 @Log4j2
-public class Conversion {
+public class ConversionService {
 
     private final XmlMapper xmlMapper = (XmlMapper) new XmlMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);

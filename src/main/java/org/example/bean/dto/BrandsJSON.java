@@ -1,4 +1,4 @@
-package org.example.service.structure;
+package org.example.bean.dto;
 
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
