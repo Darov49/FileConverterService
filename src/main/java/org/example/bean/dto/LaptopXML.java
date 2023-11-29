@@ -6,8 +6,7 @@ import lombok.*;
 /**
  * Класс для хранения характеристик ноутбука в XML
  */
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

@@ -5,8 +5,7 @@ import lombok.*;
 /**
  * Класс для хранения характеристик ноутбука в JSON
  */
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

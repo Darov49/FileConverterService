@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.experimental.UtilityClass;
-import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.example.exceptions.ConverterException;
 import org.example.bean.dto.BrandJSON;
@@ -20,7 +19,6 @@ import java.util.List;
  * Класс для конвертации файла из JSON в XML
  */
 @UtilityClass
-@Log4j2
 public class JSONtoXMLConverter {
     public void convert(final String inputFilePath, final String outputFilePath,
                         final XmlMapper xmlMapper, final ObjectMapper objectMapper) throws ConverterException {
@@ -35,7 +33,7 @@ public class JSONtoXMLConverter {
             });
             return brands.getBrands();
         } catch (Exception fileReadException) {
-            log.error("Не удалось считать файл json\n");
+            System.err.println("Не удалось считать файл json");
             throw new ConverterException(fileReadException);
         }
     }
@@ -56,7 +54,7 @@ public class JSONtoXMLConverter {
                     .sorted(Comparator.comparingInt(LaptopXML::getId))
                     .toList()).build();
         } catch (Exception fileConvertException) {
-            log.error("Не удалось сконвертировать файл\n");
+            System.err.println("Не удалось сконвертировать файл");
             throw new ConverterException(fileConvertException);
         }
     }
@@ -66,7 +64,7 @@ public class JSONtoXMLConverter {
         try {
             xmlMapper.writeValue(new File(outputFile), laptopsXML);
         } catch (Exception fileWriteException) {
-            log.error("Не удалось записать данные в файл xml\n");
+            System.err.println("Не удалось записать данные в файл xml");
             throw new ConverterException(fileWriteException);
         }
     }

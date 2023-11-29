@@ -8,12 +8,11 @@ import java.util.List;
 /**
  * Класс для хранения информации о бренде в JSON
  */
-@JsonTypeName("brand")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonTypeName("brand")
 public class BrandJSON {
     private String name;
     private List<LaptopJSON> laptops;

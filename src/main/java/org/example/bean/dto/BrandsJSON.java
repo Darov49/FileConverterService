@@ -8,8 +8,7 @@ import lombok.*;
 /**
  * Класс для хранения списка брендов в JSON
  */
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

@@ -5,8 +5,7 @@ import lombok.*;
 /**
  * Класс для хранения информации о видеокарте ноутбука
  */
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
