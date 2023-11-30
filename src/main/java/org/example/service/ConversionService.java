@@ -38,10 +38,10 @@ public class ConversionService {
             switch (conversionType) {
                 case XML_TO_JSON -> XMLtoJSONConverter.convert(inputFile, outputFile, xmlMapper, objectMapper);
                 case JSON_TO_XML -> JSONtoXMLConverter.convert(inputFile, outputFile, xmlMapper, objectMapper);
-                default -> System.err.println("Некорректный ввод");
             }
         } catch (ConverterException converterException) {
-            System.err.println("Конвертация прервана");
+            System.err.println("Конвертация прервана: " + converterException.getMessage() +
+                    "\nСмотри подробности в файле логов");
             throw converterException;
         }
     }

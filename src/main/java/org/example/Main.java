@@ -5,6 +5,8 @@ import org.example.exceptions.ConverterException;
 import org.example.service.MenuService;
 import org.example.service.ConversionService;
 
+import static java.lang.System.exit;
+
 public class Main {
     public static void main(String[] args) {
         try {
@@ -24,6 +26,7 @@ public class Main {
             System.out.println("Конвертация завершена успешно");
         } catch (ConverterException exception) {
             System.err.println("Завершение программы");
+            exit(-1);
         }
     }
 }

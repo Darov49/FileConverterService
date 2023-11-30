@@ -2,6 +2,7 @@ package org.example.service.converters;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.experimental.UtilityClass;
+import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.example.exceptions.ConverterException;
 import org.example.bean.dto.BrandJSON;
@@ -10,6 +11,7 @@ import org.example.bean.dto.LaptopJSON;
 import org.example.bean.dto.LaptopXML;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /***
  * Класс для конвертации файла из XML в JSON
  */
+@Log4j2
 @UtilityClass
 public class XMLtoJSONConverter {
     public void convert(final String inputFilePath, final String outputFilePath,
@@ -33,9 +36,9 @@ public class XMLtoJSONConverter {
         try {
             return xmlMapper.readValue(new File(inputFile), new TypeReference<>() {
             });
-        } catch (Exception fileReadException) {
-            System.err.println("Не удалось считать файл xml");
-            throw new ConverterException(fileReadException);
+        } catch (IOException fileReadException) {
+            log.error("Ошибка при считывании файла xml", fileReadException);
+            throw new ConverterException("не удалось считать файл xml");
         }
     }
 
@@ -59,8 +62,8 @@ public class XMLtoJSONConverter {
                     .sorted(Comparator.comparing(BrandJSON::getName))
                     .toList()).build();
         } catch (Exception fileConvertException) {
-            System.err.println("Не удалось сконвертировать файл");
-            throw new ConverterException(fileConvertException);
+            log.error("Ошибка при конвертировании файла из xml в json", fileConvertException);
+            throw new ConverterException("не удалось сконвертировать файл");
         }
     }
 
@@ -69,8 +72,8 @@ public class XMLtoJSONConverter {
         try {
             objectMapper.writeValue(new File(outputFile), brandsJSON);
         } catch (Exception fileWriteException) {
-            System.err.println("Не удалось записать данные в файл json");
-            throw new ConverterException(fileWriteException);
+            log.error("Ошибка при записи в файл json", fileWriteException);
+            throw new ConverterException("не удалось записать данные в файл json");
         }
     }
 }
