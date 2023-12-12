@@ -1,4 +1,4 @@
-package org.example.bean.dto;
+package org.example.bean;
 
 import lombok.*;
 
@@ -6,10 +6,8 @@ import lombok.*;
  * Класс для хранения информации о процессоре ноутбука
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class CPU {
+public class Cpu {
     private String model;
     private int numCores;
     private double frequency;

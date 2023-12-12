@@ -1,4 +1,4 @@
-package org.example.bean.dto;
+package org.example.bean;
 
 import lombok.*;
 
@@ -9,11 +9,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LaptopJSON {
+public class LaptopJson {
     private int id;
     private String model;
-    private CPU cpu;
+    private Cpu cpu;
     private int ram;
     private int storage;
-    private GPU gpu;
+    private Gpu gpu;
 }

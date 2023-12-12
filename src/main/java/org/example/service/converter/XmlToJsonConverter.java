@@ -1,14 +1,14 @@
-package org.example.service.converters;
+package org.example.service.converter;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
-import org.example.exceptions.ConverterException;
-import org.example.bean.dto.BrandJSON;
-import org.example.bean.dto.BrandsJSON;
-import org.example.bean.dto.LaptopJSON;
-import org.example.bean.dto.LaptopXML;
+import org.example.bean.BrandJson;
+import org.example.bean.BrandsJson;
+import org.example.bean.LaptopXml;
+import org.example.exception.ConverterException;
+import org.example.bean.LaptopJson;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Log4j2
 @UtilityClass
-public class XMLtoJSONConverter {
+public class XmlToJsonConverter {
     public void convert(final String inputFilePath, final String outputFilePath,
                         final XmlMapper xmlMapper, final ObjectMapper objectMapper) throws ConverterException {
         val laptops = readXML(inputFilePath, xmlMapper);
@@ -32,7 +32,7 @@ public class XMLtoJSONConverter {
         write(brands, outputFilePath, objectMapper);
     }
 
-    private List<LaptopXML> readXML(final String inputFile, final XmlMapper xmlMapper) throws ConverterException {
+    private List<LaptopXml> readXML(final String inputFile, final XmlMapper xmlMapper) throws ConverterException {
         try {
             return xmlMapper.readValue(new File(inputFile), new TypeReference<>() {
             });
@@ -42,32 +42,32 @@ public class XMLtoJSONConverter {
         }
     }
 
-    private BrandsJSON transform(final List<LaptopXML> laptops) throws ConverterException {
+    private BrandsJson transform(final List<LaptopXml> laptops) throws ConverterException {
         try {
-            return BrandsJSON.builder().brands(laptops.stream()
-                    .collect(Collectors.groupingBy(LaptopXML::getBrand,
-                            Collectors.mapping(laptopXML -> LaptopJSON.builder()
-                                    .id(laptopXML.getId())
-                                    .model(laptopXML.getModel())
-                                    .cpu(laptopXML.getCpu())
-                                    .ram(laptopXML.getRam())
-                                    .storage(laptopXML.getStorage())
-                                    .gpu(laptopXML.getGpu())
+            return BrandsJson.builder().brands(laptops.stream()
+                    .collect(Collectors.groupingBy(LaptopXml::getBrand,
+                            Collectors.mapping(laptopXml -> LaptopJson.builder()
+                                    .id(laptopXml.getId())
+                                    .model(laptopXml.getModel())
+                                    .cpu(laptopXml.getCpu())
+                                    .ram(laptopXml.getRam())
+                                    .storage(laptopXml.getStorage())
+                                    .gpu(laptopXml.getGpu())
                                     .build(), Collectors.toList())))
                     .entrySet().stream()
-                    .map(entry -> BrandJSON.builder()
+                    .map(entry -> BrandJson.builder()
                             .name(entry.getKey())
                             .laptops(entry.getValue())
                             .build())
-                    .sorted(Comparator.comparing(BrandJSON::getName))
+                    .sorted(Comparator.comparing(BrandJson::getName))
                     .toList()).build();
         } catch (Exception fileConvertException) {
             log.error("Ошибка при конвертировании файла из xml в json", fileConvertException);
-            throw new ConverterException("не удалось сконвертировать файл");
+            throw new ConverterException("не удалось сконвертировать файл", fileConvertException);
         }
     }
 
-    private void write(final BrandsJSON brandsJSON, final String outputFile, final ObjectMapper objectMapper)
+    private void write(final BrandsJson brandsJSON, final String outputFile, final ObjectMapper objectMapper)
             throws ConverterException {
         try {
             objectMapper.writeValue(new File(outputFile), brandsJSON);

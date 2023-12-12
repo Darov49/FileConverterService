@@ -2,16 +2,16 @@ package org.example.service;
 
 import lombok.experimental.UtilityClass;
 import lombok.val;
-import org.example.exceptions.ConverterException;
+import org.example.exception.ConverterException;
 
 import java.io.File;
 import java.util.Scanner;
 
 @UtilityClass
 public class MenuService {
-    private final Scanner scanner = new Scanner(System.in);
-    private final String jsonExtension = ".json";
-    private final String xmlExtension = ".xml";
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final String XML_EXTENSION = ".xml";
+    private static final String JSON_EXTENSION = ".json";
     private File checkingFile;
 
 
@@ -44,13 +44,13 @@ public class MenuService {
     private boolean isCorrectInputFile(final String inputFile) {
         checkingFile = new File(inputFile);
         return (checkingFile.exists() && !checkingFile.isDirectory() &&
-                (inputFile.endsWith(xmlExtension) || inputFile.endsWith(jsonExtension)));
+                (inputFile.endsWith(XML_EXTENSION) || inputFile.endsWith(JSON_EXTENSION)));
     }
 
     private boolean isCorrectOutputFile(final String inputFile, String outputFile) {
         checkingFile = new File(outputFile);
-        final boolean isCorrectExtension = (inputFile.endsWith(xmlExtension) && outputFile.endsWith(jsonExtension) ||
-                inputFile.endsWith(jsonExtension) && outputFile.endsWith(xmlExtension));
+        final boolean isCorrectExtension = (inputFile.endsWith(XML_EXTENSION) && outputFile.endsWith(JSON_EXTENSION) ||
+                inputFile.endsWith(JSON_EXTENSION) && outputFile.endsWith(XML_EXTENSION));
         return (!checkingFile.isDirectory() && checkingFile.getParentFile().exists() && isCorrectExtension);
     }
 }

@@ -1,7 +1,7 @@
 package org.example;
 
 import lombok.val;
-import org.example.exceptions.ConverterException;
+import org.example.exception.ConverterException;
 import org.example.service.MenuService;
 import org.example.service.ConversionService;
 

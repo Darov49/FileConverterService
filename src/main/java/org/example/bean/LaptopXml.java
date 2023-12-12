@@ -1,4 +1,4 @@
-package org.example.bean.dto;
+package org.example.bean;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.*;
@@ -10,13 +10,13 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LaptopXML {
+public class LaptopXml {
     @JacksonXmlProperty(isAttribute = true)
     private int id;
     private String brand;
     private String model;
-    private CPU cpu;
+    private Cpu cpu;
     private int ram;
     private int storage;
-    private GPU gpu;
+    private Gpu gpu;
 }

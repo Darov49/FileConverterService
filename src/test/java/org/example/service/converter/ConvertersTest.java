@@ -1,4 +1,4 @@
-package org.example.service.converters;
+package org.example.service.converter;
 
 import org.example.service.ConversionService;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ConvertersTest {
     @Test
-    void testXMLtoJSONConvert() throws Exception {
+    void testXmlToJsonConvert() throws Exception {
         String outputPath = "src/test/resources/result.json";
         ConversionService.convert("src/test/resources/data.xml", outputPath);
 
@@ -25,7 +25,7 @@ class ConvertersTest {
     }
 
     @Test
-    void testJSONtoXMLConvert() throws Exception {
+    void testJsonToXmlConvert() throws Exception {
         String outputPath = "src/test/resources/result.xml";
         ConversionService.convert("src/test/resources/data.json", outputPath);
 

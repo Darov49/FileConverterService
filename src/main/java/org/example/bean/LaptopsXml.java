@@ -1,4 +1,4 @@
-package org.example.bean.dto;
+package org.example.bean;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
@@ -12,11 +12,10 @@ import java.util.List;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @JacksonXmlRootElement(localName = "laptops")
-public class LaptopsXML {
+public class LaptopsXml {
     @JsonProperty("laptop")
     @JacksonXmlElementWrapper(useWrapping = false)
-    private List<LaptopXML> laptops;
+    private List<LaptopXml> laptops;
 }

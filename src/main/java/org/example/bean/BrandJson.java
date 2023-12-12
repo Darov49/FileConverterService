@@ -1,4 +1,4 @@
-package org.example.bean.dto;
+package org.example.bean;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.*;
@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @JsonTypeName("brand")
-public class BrandJSON {
+public class BrandJson {
     private String name;
-    private List<LaptopJSON> laptops;
+    private List<LaptopJson> laptops;
 }

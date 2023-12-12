@@ -1,4 +1,4 @@
-package org.example.bean.dto;
+package org.example.bean;
 
 import lombok.*;
 
@@ -6,10 +6,8 @@ import lombok.*;
  * Класс для хранения информации о видеокарте ноутбука
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class GPU {
+public class Gpu {
     private String model;
     private int volume;
 }

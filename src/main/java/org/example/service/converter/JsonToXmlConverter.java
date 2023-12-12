@@ -1,16 +1,15 @@
-package org.example.service.converters;
+package org.example.service.converter;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
-import org.example.exceptions.ConverterException;
-import org.example.bean.dto.BrandJSON;
-import org.example.bean.dto.BrandsJSON;
-import org.example.bean.dto.LaptopXML;
-import org.example.bean.dto.LaptopsXML;
+import org.example.bean.BrandJson;
+import org.example.bean.LaptopXml;
+import org.example.exception.ConverterException;
+import org.example.bean.BrandsJson;
+import org.example.bean.LaptopsXml;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +21,7 @@ import java.util.List;
  */
 @Log4j2
 @UtilityClass
-public class JSONtoXMLConverter {
+public class JsonToXmlConverter {
     public void convert(final String inputFilePath, final String outputFilePath,
                         final XmlMapper xmlMapper, final ObjectMapper objectMapper) throws ConverterException {
         val brands = readJSON(inputFilePath, objectMapper);
@@ -30,22 +29,20 @@ public class JSONtoXMLConverter {
         write(laptops, outputFilePath, xmlMapper);
     }
 
-    private List<BrandJSON> readJSON(final String inputFile, final ObjectMapper objectMapper) throws ConverterException {
+    private List<BrandJson> readJSON(final String inputFile, final ObjectMapper objectMapper) throws ConverterException {
         try {
-            final BrandsJSON brands = objectMapper.readValue(new File(inputFile), new TypeReference<>() {
-            });
-            return brands.getBrands();
+            return objectMapper.readValue(new File(inputFile), BrandsJson.class).getBrands();
         } catch (IOException fileReadException) {
             log.error("Ошибка при считывании файла json", fileReadException);
             throw new ConverterException("не удалось считать файл json");
         }
     }
 
-    private LaptopsXML transform(final List<BrandJSON> brands) throws ConverterException {
+    private LaptopsXml transform(final List<BrandJson> brands) throws ConverterException {
         try {
-            return LaptopsXML.builder().laptops(brands.stream()
+            return LaptopsXml.builder().laptops(brands.stream()
                     .flatMap(brand -> brand.getLaptops().stream()
-                            .map(laptopJSON -> LaptopXML.builder()
+                            .map(laptopJSON -> LaptopXml.builder()
                                     .id(laptopJSON.getId())
                                     .brand(brand.getName())
                                     .model(laptopJSON.getModel())
@@ -54,7 +51,7 @@ public class JSONtoXMLConverter {
                                     .storage(laptopJSON.getStorage())
                                     .gpu(laptopJSON.getGpu())
                                     .build()))
-                    .sorted(Comparator.comparingInt(LaptopXML::getId))
+                    .sorted(Comparator.comparingInt(LaptopXml::getId))
                     .toList()).build();
         } catch (Exception fileConvertException) {
             log.error("Ошибка при конвертировании файла из json в xml", fileConvertException);
@@ -62,7 +59,7 @@ public class JSONtoXMLConverter {
         }
     }
 
-    private void write(final LaptopsXML laptopsXML, final String outputFile, final XmlMapper xmlMapper)
+    private void write(final LaptopsXml laptopsXML, final String outputFile, final XmlMapper xmlMapper)
             throws ConverterException {
         try {
             xmlMapper.writeValue(new File(outputFile), laptopsXML);
