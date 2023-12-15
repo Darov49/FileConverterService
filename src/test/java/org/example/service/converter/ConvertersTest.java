@@ -2,6 +2,8 @@ package org.example.service.converter;
 
 import org.example.service.ConversionService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,29 +13,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ConvertersTest {
     @Test
-    void testXmlToJsonConvert() throws Exception {
-        String outputPath = "src/test/resources/result.json";
-        ConversionService.convert("src/test/resources/data.xml", outputPath);
+    void testXmlToJsonConvert(@TempDir Path tempDir) throws Exception {
+        Path outputPath = tempDir.resolve("result.json");
+        ConversionService.convert("src/test/resources/data.xml", outputPath.toString());
 
         Path expectedFile = Paths.get("src/test/resources/data.json");
-        Path actualFile = Paths.get(outputPath);
 
         String inputFileContent = Files.readString(expectedFile).replaceAll("\\s", "");
-        String outputFileContent = Files.readString(actualFile).replaceAll("\\s", "");
+        String outputFileContent = Files.readString(outputPath).replaceAll("\\s", "");
 
         assertEquals(inputFileContent, outputFileContent);
     }
 
     @Test
-    void testJsonToXmlConvert() throws Exception {
-        String outputPath = "src/test/resources/result.xml";
-        ConversionService.convert("src/test/resources/data.json", outputPath);
+    void testJsonToXmlConvert(@TempDir Path tempDir) throws Exception {
+        Path outputPath = tempDir.resolve("result.xml");
+        ConversionService.convert("src/test/resources/data.json", outputPath.toString());
 
         Path expectedFile = Paths.get("src/test/resources/data.xml");
-        Path actualFile = Paths.get(outputPath);
 
         String inputFileContent = Files.readString(expectedFile).trim().replaceAll("\\s", "");
-        String outputFileContent = Files.readString(actualFile).trim().replaceAll("\\s", "");
+        String outputFileContent = Files.readString(outputPath).trim().replaceAll("\\s", "");
 
         assertEquals(inputFileContent, outputFileContent);
     }
