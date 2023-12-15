@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.mapper.LaptopMapper;
 
 /***
  * Класс для конвертации файла из XML в JSON
@@ -32,7 +33,7 @@ public class XmlToJsonConverter {
         write(brands, outputFilePath, objectMapper);
     }
 
-    private List<LaptopXml> readXML(final String inputFile, final XmlMapper xmlMapper) throws ConverterException {
+    public List<LaptopXml> readXML(final String inputFile, final XmlMapper xmlMapper) throws ConverterException {
         try {
             return xmlMapper.readValue(new File(inputFile), new TypeReference<>() {
             });
@@ -46,14 +47,7 @@ public class XmlToJsonConverter {
         try {
             return BrandsJson.builder().brands(laptops.stream()
                     .collect(Collectors.groupingBy(LaptopXml::getBrand,
-                            Collectors.mapping(laptopXml -> LaptopJson.builder()
-                                    .id(laptopXml.getId())
-                                    .model(laptopXml.getModel())
-                                    .cpu(laptopXml.getCpu())
-                                    .ram(laptopXml.getRam())
-                                    .storage(laptopXml.getStorage())
-                                    .gpu(laptopXml.getGpu())
-                                    .build(), Collectors.toList())))
+                            Collectors.mapping(LaptopMapper.INSTANCE::toLaptopJson, Collectors.toList())))
                     .entrySet().stream()
                     .map(entry -> BrandJson.builder()
                             .name(entry.getKey())

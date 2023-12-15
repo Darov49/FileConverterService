@@ -10,9 +10,11 @@ import org.example.bean.LaptopXml;
 import org.example.exception.ConverterException;
 import org.example.bean.BrandsJson;
 import org.example.bean.LaptopsXml;
+import org.example.mapper.LaptopMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -42,15 +44,7 @@ public class JsonToXmlConverter {
         try {
             return LaptopsXml.builder().laptops(brands.stream()
                     .flatMap(brand -> brand.getLaptops().stream()
-                            .map(laptopJSON -> LaptopXml.builder()
-                                    .id(laptopJSON.getId())
-                                    .brand(brand.getName())
-                                    .model(laptopJSON.getModel())
-                                    .cpu(laptopJSON.getCpu())
-                                    .ram(laptopJSON.getRam())
-                                    .storage(laptopJSON.getStorage())
-                                    .gpu(laptopJSON.getGpu())
-                                    .build()))
+                            .map(laptopJSON -> LaptopMapper.INSTANCE.toLaptopXml(laptopJSON, brand)))
                     .sorted(Comparator.comparingInt(LaptopXml::getId))
                     .toList()).build();
         } catch (Exception fileConvertException) {
