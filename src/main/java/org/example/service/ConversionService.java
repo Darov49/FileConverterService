@@ -25,6 +25,7 @@ public class ConversionService {
 
     public void convert(final String inputFile, final String outputFile) throws ConverterException {
         try {
+            FileValidator.validateFiles(inputFile, outputFile);
             val conversionType = getConversionType(inputFile, outputFile);
             FileWorker fileWorker = new FileWorker(inputFile, outputFile);
             switch (conversionType) {
