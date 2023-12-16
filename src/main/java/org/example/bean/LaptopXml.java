@@ -1,22 +1,23 @@
 package org.example.bean;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 
 /**
  * Класс для хранения характеристик ноутбука в XML
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class LaptopXml {
-    @JacksonXmlProperty(isAttribute = true)
-    private int id;
+@JsonPropertyOrder({"id", "brand", "model", "cpu", "ram", "storage", "gpu"})
+public class LaptopXml extends Laptop {
+
     private String brand;
-    private String model;
-    private Cpu cpu;
-    private int ram;
-    private int storage;
-    private Gpu gpu;
+
+    @Builder
+    public LaptopXml (int id, String brand, String model, Cpu cpu, int ram, int storage, Gpu gpu) {
+        super(id, model, cpu, ram, storage, gpu);
+        this.brand = brand;
+    }
 }
