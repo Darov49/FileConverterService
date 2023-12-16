@@ -1,12 +1,10 @@
 package org.example;
 
 import lombok.val;
-import org.example.exception.ConverterException;
 import org.example.exception.ExceptionHandler;
-import org.example.service.MenuService;
 import org.example.service.ConversionService;
+import org.example.service.MenuService;
 
-import static java.lang.System.exit;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,7 +17,8 @@ public class Main {
                 }
                 // аргументы из консоли
                 case 2 -> ConversionService.convert(args[0], args[1]);
-                default -> throw new IllegalArgumentException(String.format("Неверное число аргументов: %d%n", args.length));
+                default ->
+                        throw new IllegalArgumentException(String.format("Неверное число аргументов: %d%n", args.length));
             }
             System.out.println("Конвертация завершена успешно");
         } catch (Exception exception) {
