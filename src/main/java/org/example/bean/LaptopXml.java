@@ -7,7 +7,7 @@ import lombok.*;
  * Класс для хранения характеристик ноутбука в XML
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonPropertyOrder({"id", "brand", "model", "cpu", "ram", "storage", "gpu"})
