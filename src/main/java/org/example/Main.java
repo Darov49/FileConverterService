@@ -2,6 +2,7 @@ package org.example;
 
 import lombok.val;
 import org.example.exception.ConverterException;
+import org.example.exception.ExceptionHandler;
 import org.example.service.MenuService;
 import org.example.service.ConversionService;
 
@@ -25,8 +26,7 @@ public class Main {
             }
             System.out.println("Конвертация завершена успешно");
         } catch (ConverterException exception) {
-            System.err.println("Завершение программы");
-            exit(-1);
+            ExceptionHandler.handleException(exception);
         }
     }
 }

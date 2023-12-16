@@ -1,9 +1,9 @@
 package org.example.service;
 
 import lombok.experimental.UtilityClass;
-import org.example.exception.ConverterException;
 
 import java.io.File;
+import java.io.IOException;
 
 @UtilityClass
 public class FileValidator {
@@ -11,13 +11,13 @@ public class FileValidator {
     private static final String JSON_EXTENSION = ".json";
     private File checkingFile;
 
-    public void validateFiles(final String inputFile, final String outputFile) throws ConverterException {
+    public void validateFiles(final String inputFile, final String outputFile) throws IOException {
         if (!isCorrectInputFile(inputFile)) {
-            throw new ConverterException("Некорректный входной файл");
+            throw new IOException("некорректный входной файл " + inputFile);
         }
 
         if (!isCorrectOutputFile(inputFile, outputFile)) {
-            throw new ConverterException("Некорректный выходной файл");
+            throw new IOException("некорректный выходной файл " + outputFile);
         }
     }
     private boolean isCorrectInputFile(final String inputFile) {

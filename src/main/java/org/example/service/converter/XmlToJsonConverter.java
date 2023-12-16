@@ -1,7 +1,6 @@
 package org.example.service.converter;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.example.bean.BrandJson;
 import org.example.bean.BrandsJson;
 import org.example.bean.LaptopXml;
@@ -15,7 +14,6 @@ import java.util.stream.Collectors;
 /***
  * Класс для конвертации файла из XML в JSON
  */
-@Log4j2
 @AllArgsConstructor
 public class XmlToJsonConverter {
 
@@ -34,8 +32,7 @@ public class XmlToJsonConverter {
                     .sorted(Comparator.comparing(BrandJson::getName))
                     .toList()).build();
         } catch (Exception fileConvertException) {
-            log.error("Ошибка при конвертировании файла из xml в json", fileConvertException);
-            throw new ConverterException("не удалось сконвертировать файл", fileConvertException);
+            throw new ConverterException("Ошибка при конвертировании файла из xml в json", fileConvertException);
         }
     }
 }

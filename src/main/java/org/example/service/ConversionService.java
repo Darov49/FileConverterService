@@ -46,10 +46,9 @@ public class ConversionService {
                     fileWorker.writeXml(laptops);
                 }
             }
-        } catch (ConverterException converterException) {
-            System.err.println("Конвертация прервана: " + converterException.getMessage() +
-                    "\nСмотри подробности в файле логов");
-            throw converterException;
+        } catch (Exception converterException) {
+            String exceptionMessage = "Конвертация прервана: " + converterException.getMessage() + "\n";
+            throw new ConverterException(exceptionMessage, converterException);
         }
     }
 }
