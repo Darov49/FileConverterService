@@ -19,13 +19,10 @@ public class Main {
                 }
                 // аргументы из консоли
                 case 2 -> ConversionService.convert(args[0], args[1]);
-                default -> {
-                    System.err.println("Неверное число аргументов");
-                    return;
-                }
+                default -> throw new IllegalArgumentException(String.format("Неверное число аргументов: %d%n", args.length));
             }
             System.out.println("Конвертация завершена успешно");
-        } catch (ConverterException exception) {
+        } catch (Exception exception) {
             ExceptionHandler.handleException(exception);
         }
     }
