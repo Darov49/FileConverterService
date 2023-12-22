@@ -25,9 +25,8 @@ class ConvertersTest {
             val outputPath = tempDir.resolve("result.json");
             ConversionService.convert(tempFile.toString(), outputPath.toString());
 
-            val jsonResourcePath = "data.json";
             val expectedFile = Paths.get(Objects.requireNonNull
-                    (getClass().getClassLoader().getResource(jsonResourcePath)).toURI());
+                    (getClass().getClassLoader().getResource("data.json")).toURI());
 
             val inputFileContent = Files.readString(expectedFile).replaceAll("\\s", "");
             val outputFileContent = Files.readString(outputPath).replaceAll("\\s", "");
@@ -47,9 +46,8 @@ class ConvertersTest {
             val outputPath = tempDir.resolve("result.xml");
             ConversionService.convert(tempFile.toString(), outputPath.toString());
 
-            val xmlResourcePath = "data.xml";
             val expectedFile = Paths.get(Objects.requireNonNull
-                    (getClass().getClassLoader().getResource(xmlResourcePath)).toURI());
+                    (getClass().getClassLoader().getResource("data.xml")).toURI());
 
             val inputFileContent = Files.readString(expectedFile).trim().replaceAll("\\s", "");
             val outputFileContent = Files.readString(outputPath).trim().replaceAll("\\s", "");
