@@ -7,14 +7,14 @@ import org.example.exception.ConverterException;
 import org.example.service.converter.JsonToXmlConverter;
 import org.example.service.converter.XmlToJsonConverter;
 
+import static org.example.extension.FileExtensions.JSON_EXTENSION;
+import static org.example.extension.FileExtensions.XML_EXTENSION;
+
 /**
  * Класс для обработки конвертации файлов
  */
 @UtilityClass
 public class ConversionService {
-    private static final String XML_EXTENSION = ".xml";
-    private static final String JSON_EXTENSION = ".json";
-
 
     private ConversionType getConversionType(final String inputFile, final String outputFile) {
         if (StringUtils.endsWith(inputFile, XML_EXTENSION) && StringUtils.endsWith(outputFile, JSON_EXTENSION)) {
@@ -30,25 +30,17 @@ public class ConversionService {
             FileWorker fileWorker = new FileWorker(inputFile, outputFile);
             switch (conversionType) {
                 case XML_TO_JSON -> {
-                    val laptops = fileWorker.readXML();
-
-                    XmlToJsonConverter converter = new XmlToJsonConverter(laptops);
-                    val brands = converter.convert();
-
-                    fileWorker.writeJson(brands);
+                    XmlToJsonConverter converter = new XmlToJsonConverter(fileWorker.readXML());
+                    fileWorker.writeJson(converter.convert());
                 }
                 case JSON_TO_XML -> {
-                    val brands = fileWorker.readJSON();
-
-                    JsonToXmlConverter converter = new JsonToXmlConverter(brands);
-                    val laptops = converter.convert();
-
-                    fileWorker.writeXml(laptops);
+                    JsonToXmlConverter converter = new JsonToXmlConverter(fileWorker.readJSON());
+                    fileWorker.writeXml(converter.convert());
                 }
             }
         } catch (Exception converterException) {
-            String exceptionMessage = "Конвертация прервана: " + converterException.getMessage() + "\n";
-            throw new ConverterException(exceptionMessage, converterException);
+            throw new ConverterException("Конвертация прервана: " + converterException.getMessage() + "\n",
+                    converterException);
         }
     }
 }

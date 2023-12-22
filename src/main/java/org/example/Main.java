@@ -13,7 +13,7 @@ public class Main {
                 // интерактивный выбор аргументов
                 case 0 -> {
                     val fileNames = MenuService.getFileNames(); // получение имен входного и выходного файлов
-                    ConversionService.convert(fileNames[0], fileNames[1]);
+                    ConversionService.convert(fileNames.getLeft(), fileNames.getRight());
                 }
                 // аргументы из консоли
                 case 2 -> ConversionService.convert(args[0], args[1]);

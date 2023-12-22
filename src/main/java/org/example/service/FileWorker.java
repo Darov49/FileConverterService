@@ -22,13 +22,13 @@ public class FileWorker {
     private final String inputFilePath;
     private final String outputFilePath;
 
-    private static final XmlMapper xmlMapper = (XmlMapper) new XmlMapper().enable(SerializationFeature.INDENT_OUTPUT);
-    private static final ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    private static final XmlMapper XML_MAPPER = (XmlMapper) new XmlMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
 
     public List<LaptopXml> readXML() throws IOException {
         try {
-            return xmlMapper.readValue(new File(inputFilePath), new TypeReference<>() {
+            return XML_MAPPER.readValue(new File(inputFilePath), new TypeReference<>() {
             });
         } catch (IOException fileReadException) {
             throw new IOException("ошибка при считывании файла xml - " + inputFilePath, fileReadException);
@@ -37,7 +37,7 @@ public class FileWorker {
 
     public List<BrandJson> readJSON() throws IOException {
         try {
-            return objectMapper.readValue(new File(inputFilePath), BrandsJson.class).getBrands();
+            return OBJECT_MAPPER.readValue(new File(inputFilePath), BrandsJson.class).getBrands();
         } catch (IOException fileReadException) {
             throw new IOException("ошибка при считывании файла json - " + inputFilePath, fileReadException);
         }
@@ -45,7 +45,7 @@ public class FileWorker {
 
     public void writeJson(final BrandsJson brandsJSON) throws IOException {
         try {
-            objectMapper.writeValue(new File(outputFilePath), brandsJSON);
+            OBJECT_MAPPER.writeValue(new File(outputFilePath), brandsJSON);
         } catch (Exception fileWriteException) {
             throw new IOException("ошибка при записи в файл json - " + outputFilePath, fileWriteException);
         }
@@ -53,7 +53,7 @@ public class FileWorker {
 
     public void writeXml(final LaptopsXml laptopsXML) throws IOException {
         try {
-            xmlMapper.writeValue(new File(outputFilePath), laptopsXML);
+            XML_MAPPER.writeValue(new File(outputFilePath), laptopsXML);
         } catch (Exception fileWriteException) {
             throw new IOException("ошибка при записи в файл xml - " + outputFilePath, fileWriteException);
         }
