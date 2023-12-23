@@ -15,10 +15,11 @@ import java.util.stream.Collectors;
  * Класс для конвертации файла из XML в JSON
  */
 @AllArgsConstructor
-public class XmlToJsonConverter {
+public class XmlToJsonConverter implements Converter {
 
     private final List<LaptopXml> laptops;
 
+    @Override
     public BrandsJson convert() throws ConverterException {
         try {
             return BrandsJson.builder().brands(laptops.stream()

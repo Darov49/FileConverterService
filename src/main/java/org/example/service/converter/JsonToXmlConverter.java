@@ -14,9 +14,10 @@ import java.util.List;
  * Класс для конвертации файла из JSON в XML
  */
 @AllArgsConstructor
-public class JsonToXmlConverter {
+public class JsonToXmlConverter implements Converter {
     private final List<BrandJson> brands;
 
+    @Override
     public LaptopsXml convert() throws ConverterException {
         try {
             return LaptopsXml.builder().laptops(brands.stream()
