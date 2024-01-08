@@ -5,11 +5,6 @@ import lombok.val;
 import org.apache.commons.lang3.StringUtils;
 import org.example.exception.ConverterException;
 import org.example.factory.ConverterFactory;
-import org.example.factory.FileWorkerFactory;
-import org.example.file_worker.FileWorker;
-import org.example.service.converter.Converter;
-
-import java.util.List;
 
 import static org.example.extension.FileExtensions.JSON_EXTENSION;
 import static org.example.extension.FileExtensions.XML_EXTENSION;
@@ -32,11 +27,8 @@ public class ConversionService {
             FileValidator.validateFiles(inputFile, outputFile);
             val conversionType = getConversionType(inputFile, outputFile);
 
-            FileWorker fileWorker = FileWorkerFactory.createFileWorker(conversionType, inputFile, outputFile);
-            val data = fileWorker.read();
-
-            Converter converter = ConverterFactory.createConverter(conversionType, (List<?>) data);
-            fileWorker.write(converter.convert());
+            val converter = ConverterFactory.createConverter(conversionType);
+            converter.convert(inputFile, outputFile);
         } catch (Exception converterException) {
             throw new ConverterException("Конвертация прервана: " + converterException.getMessage() + "\n", converterException);
         }
