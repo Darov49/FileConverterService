@@ -10,12 +10,9 @@ import org.example.service.converter.XmlToJsonConverter;
 @UtilityClass
 public class ConverterFactory {
     public Converter createConverter(ConversionType conversionType) {
-        Converter converter = null;
-        switch (conversionType) {
-            case XML_TO_JSON -> converter = new XmlToJsonConverter();
-            case JSON_TO_XML -> converter = new JsonToXmlConverter();
-        }
-
-        return converter;
+        return switch (conversionType) {
+            case XML_TO_JSON -> new XmlToJsonConverter();
+            case JSON_TO_XML -> new JsonToXmlConverter();
+        };
     }
 }
