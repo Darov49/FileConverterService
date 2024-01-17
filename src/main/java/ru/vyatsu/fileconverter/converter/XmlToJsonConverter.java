@@ -49,7 +49,9 @@ public class XmlToJsonConverter implements Converter {
                     .collect(groupingBy(LaptopXml::getBrand,
                             mapping(LaptopMapper.INSTANCE::toLaptopJson, toList())))
                     .entrySet().stream()
-                    .map(entry -> BrandJson.builder().name(entry.getKey()).laptops(entry.getValue()).build())
+                    .map(entry -> BrandJson.builder().name(entry.getKey())
+                            .laptops(entry.getValue())
+                            .build())
                     .sorted(comparing(BrandJson::getName))
                     .toList()).build();
         } catch (Exception fileConvertException) {
