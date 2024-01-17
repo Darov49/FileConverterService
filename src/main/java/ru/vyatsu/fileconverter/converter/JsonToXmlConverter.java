@@ -1,4 +1,4 @@
-package ru.vyatsu.fileconverter;
+package ru.vyatsu.fileconverter.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -12,8 +12,9 @@ import ru.vyatsu.fileconverter.mapper.LaptopMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
+
+import static java.util.Comparator.comparingInt;
 
 /***
  * Класс для конвертации файла из JSON в XML
@@ -45,7 +46,7 @@ public class JsonToXmlConverter implements Converter {
             return LaptopsXml.builder().laptops(brands.stream()
                     .flatMap(brand -> brand.getLaptops().stream()
                             .map(laptopJSON -> LaptopMapper.INSTANCE.toLaptopXml(laptopJSON, brand)))
-                    .sorted(Comparator.comparingInt(LaptopXml::getId))
+                    .sorted(comparingInt(LaptopXml::getId))
                     .toList()).build();
         } catch (Exception fileConvertException) {
             throw new ConverterException("ошибка при конвертировании файла из json в xml", fileConvertException);

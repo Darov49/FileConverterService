@@ -1,4 +1,4 @@
-package ru.vyatsu.fileconverter;
+package ru.vyatsu.fileconverter.converter;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,9 +12,10 @@ import ru.vyatsu.fileconverter.mapper.LaptopMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.*;
 
 /***
  * Класс для конвертации файла из XML в JSON
@@ -45,10 +46,12 @@ public class XmlToJsonConverter implements Converter {
     public BrandsJson transform(final List<LaptopXml> laptops) throws ConverterException {
         try {
             return BrandsJson.builder().brands(laptops.stream()
-                    .collect(Collectors.groupingBy(LaptopXml::getBrand,
-                            Collectors.mapping(LaptopMapper.INSTANCE::toLaptopJson, Collectors.toList())))
-                    .entrySet().stream().map(entry -> BrandJson.builder().name(entry.getKey()).laptops(entry.getValue()).build())
-                    .sorted(Comparator.comparing(BrandJson::getName)).toList()).build();
+                    .collect(groupingBy(LaptopXml::getBrand,
+                            mapping(LaptopMapper.INSTANCE::toLaptopJson, toList())))
+                    .entrySet().stream()
+                    .map(entry -> BrandJson.builder().name(entry.getKey()).laptops(entry.getValue()).build())
+                    .sorted(comparing(BrandJson::getName))
+                    .toList()).build();
         } catch (Exception fileConvertException) {
             throw new ConverterException("ошибка при конвертировании файла из xml в json", fileConvertException);
         }

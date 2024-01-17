@@ -2,9 +2,9 @@ package ru.vyatsu.fileconverter.factory;
 
 import lombok.experimental.UtilityClass;
 import ru.vyatsu.fileconverter.service.ConversionType;
-import ru.vyatsu.fileconverter.Converter;
-import ru.vyatsu.fileconverter.JsonToXmlConverter;
-import ru.vyatsu.fileconverter.XmlToJsonConverter;
+import ru.vyatsu.fileconverter.converter.Converter;
+import ru.vyatsu.fileconverter.converter.JsonToXmlConverter;
+import ru.vyatsu.fileconverter.converter.XmlToJsonConverter;
 
 
 @UtilityClass

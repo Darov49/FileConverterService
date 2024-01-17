@@ -1,7 +1,6 @@
 package ru.vyatsu.fileconverter.service;
 
 import lombok.experimental.UtilityClass;
-import lombok.val;
 import org.apache.commons.lang3.StringUtils;
 import ru.vyatsu.fileconverter.exception.ConverterException;
 import ru.vyatsu.fileconverter.factory.ConverterFactory;
@@ -24,8 +23,8 @@ public class ConversionService {
         try {
             FileValidator.validateFiles(inputFile, outputFile);
 
-            val converter = ConverterFactory.createConverter(getConversionType(inputFile, outputFile));
-            converter.convert(inputFile, outputFile);
+            ConverterFactory.createConverter(getConversionType(inputFile, outputFile))
+                    .convert(inputFile, outputFile);
         } catch (Exception converterException) {
             throw new ConverterException("Конвертация прервана: " + converterException.getMessage(), converterException);
         }
