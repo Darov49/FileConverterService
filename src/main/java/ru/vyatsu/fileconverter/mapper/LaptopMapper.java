@@ -13,8 +13,8 @@ public interface LaptopMapper {
     LaptopMapper INSTANCE = Mappers.getMapper(LaptopMapper.class);
 
     @Mapping(target = "brand", source = "brandJson.name")
-    LaptopXml toLaptopXml(final LaptopJson laptopJson, final BrandJson brandJson);
+    LaptopXml toLaptopXml(LaptopJson laptopJson, BrandJson brandJson);
 
-    LaptopJson toLaptopJson(final LaptopXml laptopXml);
+    LaptopJson toLaptopJson(LaptopXml laptopXml);
 
 }

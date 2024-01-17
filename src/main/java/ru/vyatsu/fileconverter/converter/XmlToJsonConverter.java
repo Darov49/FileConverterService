@@ -45,15 +45,19 @@ public class XmlToJsonConverter implements Converter {
 
     public BrandsJson transform(final List<LaptopXml> laptops) throws ConverterException {
         try {
-            return BrandsJson.builder().brands(laptops.stream()
-                    .collect(groupingBy(LaptopXml::getBrand,
-                            mapping(LaptopMapper.INSTANCE::toLaptopJson, toList())))
-                    .entrySet().stream()
-                    .map(entry -> BrandJson.builder().name(entry.getKey())
-                            .laptops(entry.getValue())
-                            .build())
-                    .sorted(comparing(BrandJson::getName))
-                    .toList()).build();
+            return BrandsJson.builder()
+                    .brands(laptops.stream()
+                            .collect(groupingBy(
+                                    LaptopXml::getBrand,
+                                    mapping(LaptopMapper.INSTANCE::toLaptopJson, toList())))
+                            .entrySet().stream()
+                            .map(entry -> BrandJson.builder()
+                                    .name(entry.getKey())
+                                    .laptops(entry.getValue())
+                                    .build())
+                            .sorted(comparing(BrandJson::getName))
+                            .toList())
+                    .build();
         } catch (Exception fileConvertException) {
             throw new ConverterException("ошибка при конвертировании файла из xml в json", fileConvertException);
         }

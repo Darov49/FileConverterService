@@ -43,11 +43,13 @@ public class JsonToXmlConverter implements Converter {
 
     public LaptopsXml transform(final List<BrandJson> brands) throws ConverterException {
         try {
-            return LaptopsXml.builder().laptops(brands.stream()
-                    .flatMap(brand -> brand.getLaptops().stream()
-                            .map(laptopJSON -> LaptopMapper.INSTANCE.toLaptopXml(laptopJSON, brand)))
-                    .sorted(comparingInt(LaptopXml::getId))
-                    .toList()).build();
+            return LaptopsXml.builder()
+                    .laptops(brands.stream()
+                            .flatMap(brand -> brand.getLaptops().stream()
+                                    .map(laptopJSON -> LaptopMapper.INSTANCE.toLaptopXml(laptopJSON, brand)))
+                            .sorted(comparingInt(LaptopXml::getId))
+                            .toList())
+                    .build();
         } catch (Exception fileConvertException) {
             throw new ConverterException("ошибка при конвертировании файла из json в xml", fileConvertException);
         }
